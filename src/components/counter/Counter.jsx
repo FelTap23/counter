@@ -1,50 +1,37 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import './Counter.css'
+import React, { Component } from 'react'
+import CounterButton from './CounterButton'
 
-class Counter extends Component{
 
-    //Define the initial state in a constructor
-    constructor(){
-        super(); // Very common error if you don't use this super constructor
+
+class Counter extends Component {
+
+    constructor() {
+        super(); 
         this.state = {
-            counter : 0
+            counter: 0
         };
-        // This binding is necessary to make `this` work in the callback
+        
         this.increment = this.increment.bind(this);
     }
 
-
-
-    render(){
-        const styleFromJs = { fontSize: "50px", color: "red" };
+    render() {
         return (
             <div className="Counter">
-                <h1>Counter</h1>
-                <span style={styleFromJs}>{this.state.counter}</span>
-                {/* Dont use this way to define a function  onClick={this.increment() to avoid invoke in the inital load} */}
-                <button onClick={this.increment}>+{this.props.valueIncrement}</button>
+                <p>It's working as expected</p>
+                <CounterButton incrementParent= {this.increment}></CounterButton>
+                <CounterButton valueIncrement={1} incrementParent= {this.increment}></CounterButton>
+                <CounterButton valueIncrement={5} incrementParent= {this.increment}></CounterButton>
+                <CounterButton valueIncrement={10} incrementParent= {this.increment}></CounterButton>
+                <span>{this.state.counter}</span>
             </div>
         );
-
-    };
-
-    increment(){
-        this.setState({
-            counter: this.state.counter + this.props.valueIncrement
-        });
     }
 
+    increment(value){
+        console.log(`Increment calling by parent ${value}`);
+        this.setState({
+            counter: this.state.counter + value
+        });
+    }
 }
-
-Counter.defaultProps = {
-    valueIncrement: 1
-}
-
-Counter.propTypes = {
-    valueIncrement: PropTypes.number
-}
-
-
-
 export default Counter;
