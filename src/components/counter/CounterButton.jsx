@@ -24,7 +24,8 @@ class CounterButton extends Component {
                 <span style={styleFromJs}>{this.state.counter}</span>
                 {/* Dont use this way to define a function  onClick={this.increment() to avoid invoke in the inital load} */}
                 <button onClick={this.increment}>+{this.props.valueIncrement}</button>
-                <button onClick={this.decrement}>-{this.props.valueIncrement}</button>
+                <button onClick={ () => this.props.decrementParent(this.props.valueIncrement)}>-{this.props.valueIncrement}</button>
+                
             </div>
         );
 
